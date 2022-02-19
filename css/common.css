@@ -1,0 +1,23 @@
+#main{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .image{
+    width: 50%;
+    height: 80vh;
+    position: relative;
+    z-index: -1;
+  }
+  .image img{
+    width: 90%;
+    height: 90%;
+    padding: 5%;
+  }
+  .image h3{
+    position: absolute;
+    margin: 5%;
+    padding: 1;
+    color: #fff;
+    background-color: #202020;
+    bottom: 2vh;
+  }

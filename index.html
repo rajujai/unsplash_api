@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+      body{
+        margin: 0;
+        margin-left: calc(5vw + 2%);
+        font-family: sans-serif;
+      }
+      #sidebar{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 5vw;
+        padding: 1%;
+        background-color: #202020;
+        color: #fff;
+      }
+      #sidebar *{
+        padding: 10%;
+        padding-left: 0;
+      }
+      #sidebar > input:focus{
+        width: 200px;
+        z-index: 11;
+        background-color: aliceblue;
+        font-size: large;
+        border: none;
+        padding-left: 2%;
+      }
+      h1{
+        text-align: center;
+        background-color: #202020;
+        color: #fff;
+        margin: 0;
+        padding: 1%;
+      }
+      #main{
+        width: calc(100vw - (5vw + 2%));
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>Unsplash</h1>
+      <div id="sidebar">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Append the horizontal navbar(sidebar) here only-->
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Append top images here only-->
+      </div>
+    </div>
+<script type="module">
+  import sidebar from "./components/sidebar.js"
+  import {makeAPICall, appendPictures} from "./scripts/main.js";
+
+
+  document.getElementById("sidebar").innerHTML = sidebar();
+  let data = await makeAPICall(`https://api.unsplash.com/photos/?client_id=PXiJOQWIQrx4Hrbs6XbmaDMyhxfhPuwZZ1R5l3f0e1Q`);
+  // console.log(data);
+
+  appendPictures(data, document.getElementById("main"));
+
+  let query = document.getElementById("searchbar");
+  query.addEventListener("keypress", async (e)=>{
+    if(e.key === "Enter"){
+      localStorage.setItem("search_term", query.value);
+      window.location.href = "./search.html";
+    }
+  })
+</script>
+</body>
+</html>
